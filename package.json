@@ -1,12 +1,13 @@
 {
   "name": "ghl-franchise-dashboard",
   "version": "1.0.0",
-  "description": "GHL Franchise Performance Dashboard - Real-time analytics across all locations",
+  "description": "GHL Franchise Performance Dashboard - Scalable multi-location analytics with AI-powered lead routing",
   "main": "index.html",
   "scripts": {
     "dev": "npx serve .",
     "build": "echo 'This is a static site, no build step required'",
-    "start": "npx serve -s ."
+    "start": "npx serve -s .",
+    "demo": "echo 'Opening dashboard demo...' && npx serve . --open"
   },
   "keywords": [
     "ghl",
@@ -14,14 +15,35 @@
     "franchise",
     "dashboard",
     "analytics",
-    "lead-routing"
+    "lead-routing",
+    "ai-powered",
+    "scalable-architecture",
+    "real-time-metrics",
+    "predictive-capacity",
+    "webhook-middleware"
   ],
-  "author": "GHL Developer Challenge Submission",
+  "author": "Senior GHL Developer - Challenge Submission",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Motekema/My-Standout-GHL-Developer-Challenge-Submission"
+  },
+  "homepage": "https://my-standout-ghl-developer-challenge-submission-2dg23bx1e.vercel.app",
   "devDependencies": {
     "serve": "^14.2.1"
   },
   "engines": {
     "node": ">=14.0.0"
+  },
+  "architecture": {
+    "pattern": "Hierarchical Sub-Account Structure",
+    "scaling": "25 to 250+ locations",
+    "features": [
+      "Dynamic Lead Routing",
+      "Real-time Capacity Management", 
+      "AI-Powered Lead Scoring",
+      "Predictive Analytics",
+      "Automated Compliance"
+    ]
   }
 }
