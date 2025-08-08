@@ -1,0 +1,27 @@
+{
+  "name": "ghl-franchise-dashboard",
+  "version": "1.0.0",
+  "description": "GHL Franchise Performance Dashboard - Real-time analytics across all locations",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'This is a static site, no build step required'",
+    "start": "npx serve -s ."
+  },
+  "keywords": [
+    "ghl",
+    "go-high-level",
+    "franchise",
+    "dashboard",
+    "analytics",
+    "lead-routing"
+  ],
+  "author": "GHL Developer Challenge Submission",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
