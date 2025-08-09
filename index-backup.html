@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GHL Developer Challenge - Complete Solution | Franchise Lead Routing System</title>
+    <meta name="description" content="Enterprise-grade GHL solution for multi-location franchise lead routing with real-time analytics, intelligent routing, and scalable architecture.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>�</text></svg>">
+    <style>
+      :root {
+        --primary-color: #3498db;
+        --primary-dark: #2980b9;
+        --success-color: #27ae60;
+        --warning-color: #f39c12;
+        --danger-color: #e74c3c;
+        --info-color: #9b59b6;
+        --text-primary: #ffffff;
+        --text-secondary: #b0bec5;
+        --text-muted: #78909c;
+        --background-primary: #0f1419;
+        --background-secondary: #1a202c;
+        --background-card: #2d3748;
+        --background-light: #4a5568;
+        --background-gray: #2d3748;
+        --shadow-light: rgba(0, 0, 0, 0.3);
+        --shadow-medium: rgba(0, 0, 0, 0.5);
+        --border-color: rgba(255, 255, 255, 0.1);
+        --border-radius: 20px;
+        --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(
+          135deg,
+          #0f1419 0%,
+          #1a202c 50%,
+          #2d3748 100%
+        );
+        background-attachment: fixed;
+        padding: 15px;
+        height: 100vh;
+        overflow: hidden;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .dashboard-container {
+        max-width: 1400px;
+        width: 100%;
+        height: calc(100vh - 30px);
+        display: flex;
+        flex-direction: column;
+        background: rgba(45, 55, 72, 0.95);
+        border-radius: 20px;
+        padding: 25px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+      }
+
+      .dashboard-header {
+        text-align: center;
+        margin-bottom: 20px;
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .dashboard-header::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, #3498db, #e74c3c, #f39c12, #27ae60);
+        border-radius: 2px;
+      }
+
+      .dashboard-title {
+        font-size: 2.2rem;
+        color: var(--text-primary);
+        margin-bottom: 8px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        background: linear-gradient(135deg, #ffffff, #3498db, #e74c3c);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .dashboard-subtitle {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+        flex-shrink: 0;
+      }
+
+      /* Animation keyframes */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInScale {
+        from {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .dashboard-container {
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      .metric-card {
+        animation: fadeInScale 0.6s ease-out;
+        animation-fill-mode: both;
+      }
+
+      .metric-card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .metric-card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .metric-card:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .metric-card:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+
+      .metric-card {
+        background: linear-gradient(145deg, #1f2937, #374151);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        border-left: 4px solid #3498db;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .metric-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(52, 152, 219, 0.3),
+          transparent
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .metric-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      }
+
+      .metric-card:hover::before {
+        opacity: 1;
+      }
+
+      .metric-card.success {
+        border-left-color: #27ae60;
+        background: linear-gradient(145deg, #1f2937, #065f46);
+      }
+      .metric-card.warning {
+        border-left-color: #f39c12;
+        background: linear-gradient(145deg, #1f2937, #92400e);
+      }
+      .metric-card.danger {
+        border-left-color: #e74c3c;
+        background: linear-gradient(145deg, #1f2937, #991b1b);
+      }
+      .metric-card.info {
+        border-left-color: #3498db;
+        background: linear-gradient(145deg, #1f2937, #1e40af);
+      }
+
+      .metric-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .metric-title {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .metric-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color: white;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        background: linear-gradient(
+          135deg,
+          var(--icon-color),
+          var(--icon-color-dark)
+        );
+      }
+
+      .metric-value {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        margin-bottom: 8px;
+        letter-spacing: -0.02em;
+      }
+
+      .metric-change {
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      .positive {
+        color: #27ae60;
+      }
+      .negative {
+        color: #e74c3c;
+      }
+
+      .locations-table {
+        background: linear-gradient(145deg, #1f2937, #374151);
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--border-color);
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+
+      .table-header {
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        color: white;
+        padding: 15px 20px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .table-header::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+      }
+
+      .table-content {
+        flex: 1;
+        overflow-y: auto;
+        padding-right: 8px;
+        min-height: 0;
+      }
+
+      /* Custom scrollbar for dark theme */
+      .table-content::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .table-content::-webkit-scrollbar-track {
+        background: rgba(55, 65, 81, 0.3);
+        border-radius: 4px;
+      }
+
+      .table-content::-webkit-scrollbar-thumb {
+        background: rgba(156, 163, 175, 0.5);
+        border-radius: 4px;
+      }
+
+      .table-content::-webkit-scrollbar-thumb:hover {
+        background: rgba(156, 163, 175, 0.8);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed; /* Fixed layout for better column control */
+      }
+
+      /* Column width control */
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 25%;
+      } /* Location */
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 12%;
+      } /* Leads */
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 12%;
+      } /* Conversion */
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 20%;
+      } /* Capacity */
+      th:nth-child(5),
+      td:nth-child(5) {
+        width: 15%;
+      } /* Response */
+      th:nth-child(6),
+      td:nth-child(6) {
+        width: 16%;
+      } /* Status */
+
+      th,
+      td {
+        text-align: left;
+        padding: 12px 10px;
+        border-bottom: 1px solid var(--border-color);
+        transition: background-color 0.2s ease;
+        color: var(--text-primary);
+        vertical-align: middle;
+      }
+
+      th {
+        background: linear-gradient(145deg, #374151, #1f2937);
+        font-weight: 700;
+        color: var(--text-primary);
+        position: sticky;
+        top: 0;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+        border-bottom: 2px solid #e74c3c;
+        text-align: center;
+      }
+
+      th:first-child {
+        text-align: left;
+      }
+
+      tbody tr {
+        transition: all 0.2s ease;
+        border-radius: 8px;
+      }
+
+      tbody tr:hover {
+        background-color: rgba(52, 152, 219, 0.08);
+        transform: translateX(2px);
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.15);
+      }
+
+      tbody tr:hover .capacity-fill {
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+      }
+
+      .status-badge {
+        padding: 8px 16px;
+        border-radius: 25px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .status-active {
+        background: linear-gradient(135deg, #065f46, #10b981);
+        color: #6ee7b7;
+        border-color: rgba(16, 185, 129, 0.3);
+      }
+
+      .status-warning {
+        background: linear-gradient(135deg, #92400e, #f59e0b);
+        color: #fbbf24;
+        border-color: rgba(245, 158, 11, 0.3);
+      }
+
+      .status-danger {
+        background: linear-gradient(135deg, #991b1b, #ef4444);
+        color: #fca5a5;
+        border-color: rgba(239, 68, 68, 0.3);
+      }
+
+      .capacity-bar {
+        width: 100px;
+        height: 12px;
+        background: rgba(55, 65, 81, 0.8);
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+        position: relative;
+        margin-bottom: 8px;
+      }
+
+      .capacity-fill {
+        height: 100%;
+        border-radius: 6px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        min-width: 2px; /* Ensure visibility even for very low percentages */
+      }
+
+      .capacity-fill::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        animation: shimmer 2s infinite;
+      }
+
+      @keyframes shimmer {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+
+      .refresh-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        color: white;
+        border: none;
+        border-radius: 45px;
+        padding: 12px 20px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .refresh-btn:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 20px 40px rgba(52, 152, 219, 0.5),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      }
+
+      .refresh-btn:active {
+        transform: translateY(-2px) scale(1.02);
+      }
+
+      .spinner {
+        border: 4px solid rgba(52, 152, 219, 0.1);
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .loading {
+        text-align: center;
+        padding: 60px 40px;
+        color: var(--text-secondary);
+        font-weight: 500;
+      }
+
+      @media (max-width: 1200px) {
+        .dashboard-container {
+          padding: 20px;
+        }
+
+        .metrics-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+        }
+
+        .dashboard-container {
+          padding: 15px;
+          height: calc(100vh - 20px);
+        }
+
+        .metrics-grid {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+
+        .dashboard-title {
+          font-size: 1.8rem;
+        }
+
+        .dashboard-subtitle {
+          font-size: 0.9rem;
+        }
+
+        table {
+          font-size: 0.85rem;
+        }
+
+        th,
+        td {
+          padding: 8px 6px;
+        }
+
+        .metric-value {
+          font-size: 1.8rem;
+        }
+
+        .metric-card {
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="dashboard-header">
+        <h1 class="dashboard-title">🏋️‍♂️ Franchise Performance Dashboard</h1>
+        <p class="dashboard-subtitle">
+          Real-time analytics across all locations
+        </p>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric-card success">
+          <div class="metric-header">
+            <span class="metric-title">Total Leads Today</span>
+            <div
+              class="metric-icon"
+              style="--icon-color: #27ae60; --icon-color-dark: #229954"
+            >
+              📈
+            </div>
+          </div>
+          <div class="metric-value" id="totalLeads">0</div>
+          <div class="metric-change positive" id="leadsChange">
+            +0% from yesterday
+          </div>
+        </div>
+
+        <div class="metric-card info">
+          <div class="metric-header">
+            <span class="metric-title">Conversion Rate</span>
+            <div
+              class="metric-icon"
+              style="--icon-color: #3498db; --icon-color-dark: #2980b9"
+            >
+              🎯
+            </div>
+          </div>
+          <div class="metric-value" id="conversionRate">0%</div>
+          <div class="metric-change" id="conversionChange">
+            +0% from yesterday
+          </div>
+        </div>
+
+        <div class="metric-card warning">
+          <div class="metric-header">
+            <span class="metric-title">Avg Response Time</span>
+            <div
+              class="metric-icon"
+              style="--icon-color: #f39c12; --icon-color-dark: #e67e22"
+            >
+              ⏱️
+            </div>
+          </div>
+          <div class="metric-value" id="responseTime">0min</div>
+          <div class="metric-change" id="responseChange">
+            0min from yesterday
+          </div>
+        </div>
+
+        <div class="metric-card info">
+          <div class="metric-header">
+            <span class="metric-title">Active Locations</span>
+            <div
+              class="metric-icon"
+              style="--icon-color: #9b59b6; --icon-color-dark: #8e44ad"
+            >
+              🏢
+            </div>
+          </div>
+          <div class="metric-value" id="activeLocations">0</div>
+          <div class="metric-change" id="locationsChange">
+            0 locations operational
+          </div>
+        </div>
+      </div>
+
+      <div class="locations-table">
+        <div class="table-header">📊 Location Performance Details</div>
+        <div class="table-content">
+          <div id="loadingIndicator" class="loading">
+            <div class="spinner"></div>
+            Loading location data...
+          </div>
+          <table id="locationsTable" style="display: none">
+            <thead>
+              <tr>
+                <th>Location</th>
+                <th>Leads Today</th>
+                <th>Conversion %</th>
+                <th>Capacity</th>
+                <th>Avg Response</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="locationsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <button class="refresh-btn" onclick="refreshDashboard()">
+      🔄 Refresh Data
+    </button>
+
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>
