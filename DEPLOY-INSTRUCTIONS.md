@@ -5,6 +5,7 @@ Follow these steps to deploy your GHL Franchise Dashboard to Vercel:
 ## 🚀 Option 1: Direct Deploy from Local Files
 
 ### Prerequisites
+
 - [Vercel CLI](https://vercel.com/cli) installed
 - [Git](https://git-scm.com/) installed
 - Vercel account (free at [vercel.com](https://vercel.com))
@@ -12,21 +13,25 @@ Follow these steps to deploy your GHL Franchise Dashboard to Vercel:
 ### Steps
 
 1. **Install Vercel CLI** (if not already installed):
+
    ```bash
    npm i -g vercel
    ```
 
 2. **Navigate to your project folder**:
+
    ```bash
    cd "c:\Users\Diss PC\My Standout GHL Developer Challenge Submission"
    ```
 
 3. **Initialize and deploy**:
+
    ```bash
    vercel
    ```
 
 4. **Follow the prompts**:
+
    - Link to existing project? `N`
    - What's your project's name? `ghl-franchise-dashboard`
    - In which directory is your code located? `./` (current directory)
@@ -42,10 +47,12 @@ Follow these steps to deploy your GHL Franchise Dashboard to Vercel:
 ### Steps
 
 1. **Create a new GitHub repository**:
+
    - Go to [github.com](https://github.com) and create a new repository
    - Name it `ghl-franchise-dashboard`
 
 2. **Push your code to GitHub**:
+
    ```bash
    cd "c:\Users\Diss PC\My Standout GHL Developer Challenge Submission"
    git init
@@ -57,6 +64,7 @@ Follow these steps to deploy your GHL Franchise Dashboard to Vercel:
    ```
 
 3. **Connect to Vercel**:
+
    - Go to [vercel.com](https://vercel.com) and log in
    - Click "New Project"
    - Import your GitHub repository
@@ -79,6 +87,7 @@ The following files are already configured for Vercel:
 ## 🌐 Custom Domain (Optional)
 
 1. **In your Vercel dashboard**:
+
    - Go to your project settings
    - Click "Domains"
    - Add your custom domain
@@ -122,10 +131,12 @@ After deployment, test your dashboard:
 ### Common Issues:
 
 1. **Build fails**:
+
    - Ensure all files are in the correct locations
    - Check `vercel.json` syntax
 
 2. **JavaScript errors**:
+
    - Check browser console for errors
    - Ensure `js/dashboard.js` is accessible
 
@@ -134,6 +145,7 @@ After deployment, test your dashboard:
    - Should work without external dependencies
 
 ### Support:
+
 - Vercel Documentation: [vercel.com/docs](https://vercel.com/docs)
 - Vercel Community: [github.com/vercel/vercel/discussions](https://github.com/vercel/vercel/discussions)
 

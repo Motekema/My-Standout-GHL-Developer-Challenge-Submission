@@ -9,7 +9,7 @@ This dashboard is deployed on Vercel and provides real-time monitoring of franch
 ## ✨ Features
 
 - **Real-time Metrics**: Track leads, conversion rates, response times, and location status
-- **Interactive Dashboard**: Beautiful, responsive UI with smooth animations  
+- **Interactive Dashboard**: Beautiful, responsive UI with smooth animations
 - **Location Management**: Monitor performance across all franchise locations
 - **API Integration**: Supports real API integration with JSONBin.io and webhook testing
 - **Mobile Responsive**: Optimized for all device sizes
@@ -47,10 +47,11 @@ npx serve .
    [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/ghl-franchise-dashboard)
 
 2. **Manual Deploy**:
+
    ```bash
    # Install Vercel CLI
    npm i -g vercel
-   
+
    # Deploy
    vercel
    ```
@@ -77,6 +78,7 @@ npx serve .
 The dashboard supports real API integration:
 
 1. **JSONBin.io** (Free tier: 100k requests/month)
+
    - Sign up at [jsonbin.io](https://jsonbin.io)
    - Get your API key
    - Configure in the dashboard settings
@@ -97,18 +99,21 @@ WEBHOOK_URL=your_webhook_url
 ## 📊 Dashboard Features
 
 ### Metrics Cards
+
 - **Total Leads Today**: Current day lead count with trend
 - **Conversion Rate**: Average conversion percentage
 - **Response Time**: Average response time across locations
 - **Active Locations**: Number of operational locations
 
 ### Location Table
+
 - Real-time status indicators
 - Performance metrics per location
 - Capacity utilization bars
 - Response time tracking
 
 ### Interactive Elements
+
 - Auto-refresh functionality
 - Manual refresh button
 - Hover animations
@@ -117,19 +122,21 @@ WEBHOOK_URL=your_webhook_url
 ## 🎨 Customization
 
 ### Styling
+
 The dashboard uses CSS custom properties for easy theming:
 
 ```css
 :root {
-    --primary-color: #3498db;
-    --success-color: #27ae60;
-    --warning-color: #f39c12;
-    --danger-color: #e74c3c;
-    /* ... more variables */
+  --primary-color: #3498db;
+  --success-color: #27ae60;
+  --warning-color: #f39c12;
+  --danger-color: #e74c3c;
+  /* ... more variables */
 }
 ```
 
 ### Data Sources
+
 Modify `js/dashboard.js` to integrate with your APIs:
 
 ```javascript
@@ -143,6 +150,7 @@ async loadRealData() {
 ## 📱 Mobile Responsive
 
 The dashboard is fully responsive with breakpoints at:
+
 - Desktop: 1200px+
 - Tablet: 768px - 1199px
 - Mobile: < 768px
